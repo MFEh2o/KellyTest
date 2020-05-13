@@ -4,7 +4,7 @@
 
 rm(list=ls())
 
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Rscripts/GitHub Materials/')
+# set working directory to git repo
 dataAR=read.csv('gppData.csv', header = T, stringsAsFactors = F, sep = ',')
 
 # fixed-effect hump-shaped model - 12 different ARs and random mesocosm effect
@@ -157,7 +157,6 @@ names.box=c(expression('low chromo. \nlow P:C stoich.'), expression('low chromo.
 
 ##code for regenerating figure 3 in paper
 ##figure 3a
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('figure3.pdf', width = 12, height = 14)
 par(mfrow=c(2,2))
 par(mar=c(5.1, 7, 3.1, 2.1) + 0.1)
@@ -243,7 +242,6 @@ dev.off()
 
 ##code for generating supplemental figure 3 with observed GPP data with fit from statistical model 
 ##fits for each treatment
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('figure.s3.pdf', width = 12, height = 14)
 par(mfrow=c(2,2))
 par(mar=c(5.1, 7, 3.1, 2.1) + 0.1)
@@ -327,7 +325,7 @@ dev.off()
 
 ##plotting GPP vs. time for each treatment individually
 ##black line is the day of the 'hump' of HB lake daily GPP
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
+
 pdf('figure.gppTime.pdf', width = 12, height = 14)
 par(mfrow=c(2,2))
 par(mar=c(5.1, 7, 3.1, 2.1) + 0.1)

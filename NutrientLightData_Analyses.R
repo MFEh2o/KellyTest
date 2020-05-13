@@ -6,7 +6,6 @@ library(plyr)
 library(xts)
 
 ##read in data files
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Rscripts/GitHub Materials/')
 final=read.csv('compiledNutrientLightData.csv', header = T, stringsAsFactors = F, sep = ',')
 
 ##calculating the mean of all the variables and storing in new data frame called 'avgs' 
@@ -175,8 +174,8 @@ for(i in 1:length(predDOC)){
   predLIT[,i]=X%*%c(1,pars[1,2:8,7])
 }
 
-##########b##############################################################################
-##fgenerating figure 2 for the paper
+########################################################################################
+##generating figure 2 for the paper
 colors=rep('goldenrod1',nrow(dataAnov))
 colors[dataAnov$Site=="B"]='slateblue3'
 colors[dataAnov$Site=="C"]='violetred2'
@@ -192,7 +191,6 @@ lwds[dataAnov$Site=="C"]=3
 lwds[dataAnov$Site=="D"]=3
 
 ##putting Figure 2A-C on one pdf
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('figure2.pdf', width = 6, height = 21)
 par(mfrow=c(3,1))
 ##figure 3a
@@ -265,7 +263,6 @@ text(x, y, txt, cex=2.8)
 dev.off()
 
 ##supplementary figure S2 (TN w. ANCOVA fit)
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('supp2.pdf', width = 6, height = 7)
 par(mar=c(5.1, 5, 3.1, 2.1) + 0.1)
 plot(dataAnov$DOC,dataAnov$TN,pch=pchs,col=colors,lwd=lwds,cex=1.75,

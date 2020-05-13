@@ -4,8 +4,6 @@
 
 rm(list=ls())
 
-setwd("C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Rscripts/GitHub Materials")
-#setwd("~/Documents/Research/People/Students/current/Olson_Carly/mesocosms/manuscript/EcoLetters_Submitted/Revisions/nutrient_limitation_analyses/")
 final=read.csv('compiledNutrientLightData.csv', header = T, stringsAsFactors = F)
 
 ##data frame in form to use with ANOVAs
@@ -306,7 +304,6 @@ lwds[dataAnov$Site=="D"]=3
 
 
 ##srp 
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('supp5a.pdf', width = 6, height = 7)
 par(mar=c(5.1, 5, 3.1, 2.1) + 0.1)
 plot(dataAnov$DOC,dataAnov$SRP,pch=pchs,col=colors,lwd=lwds,cex=1.75,
@@ -320,7 +317,6 @@ legend(3, 25, legend=c("low chromo., low P:C stoich.", "low chromo., high P:C st
 dev.off()
 
 #nitrate
-setwd('C:/Users/Carly/Documents/MFE/UNDERC 2018/Mesocosm 2018/Paper/Revisions/Figures/')
 pdf('supp5b.pdf', width = 6, height = 7)
 par(mar=c(5.1, 5, 3.1, 2.1) + 0.1)
 plot(dataAnov$DOC,dataAnov$nitrate,pch=pchs,col=colors,lwd=lwds,cex=1.75,
