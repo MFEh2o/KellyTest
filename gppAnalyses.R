@@ -119,10 +119,17 @@ controlPolyCoordsAR=asPolyCoordsAR
 nutsPolyCoordsAR=asPolyCoordsAR
 
 for(i in 1:length(DOCpred)){
-  asPolyCoordsAR[c(i,(2*length(DOCpred)+1-i)),2]=quantile(GPPpredBSar[1:3,i,],probs=c(0.025,0.975))
-  bothPolyCoordsAR[c(i,(2*length(DOCpred)+1-i)),2]=quantile(GPPpredBSar[4:6,i,],probs=c(0.025,0.975))
-  controlPolyCoordsAR[c(i,(2*length(DOCpred)+1-i)),2]=quantile(GPPpredBSar[7:9,i,],probs=c(0.025,0.975))
-  nutsPolyCoordsAR[c(i,(2*length(DOCpred)+1-i)),2]=quantile(GPPpredBSar[10:12,i,],probs=c(0.025,0.975))
+  # 0.025
+  asPolyCoordsAR[i,2]=sort(GPPpredBSar[1:3,i,])[76]
+  bothPolyCoordsAR[i,2]=sort(GPPpredBSar[4:6,i,])[76]
+  controlPolyCoordsAR[i,2]=sort(GPPpredBSar[7:9,i,])[76]
+  nutsPolyCoordsAR[i,2]=sort(GPPpredBSar[10:12,i,])[76]
+  
+  #0.975
+  asPolyCoordsAR[(2*length(DOCpred)+1-i),2]=sort(GPPpredBSar[1:3,i,])[2925]
+  bothPolyCoordsAR[(2*length(DOCpred)+1-i),2]=sort(GPPpredBSar[4:6,i,])[2925]
+  controlPolyCoordsAR[(2*length(DOCpred)+1-i),2]=sort(GPPpredBSar[7:9,i,])[2925]
+  nutsPolyCoordsAR[(2*length(DOCpred)+1-i),2]=sort(GPPpredBSar[10:12,i,])[2925]
 }
 
 # generated predicted values of model
@@ -144,10 +151,11 @@ for(i in 1:length(mesos)){
   }
 }
 
+# reduce bootstrapped max GPP and critical DOC to the 95th percentiles
+cdocBSarVec=c(sort(cdocBSar[1:3,])[76:2925],sort(cdocBSar[4:6,])[76:2925],sort(cdocBSar[7:9,])[76:2925],sort(cdocBSar[10:12,])[76:2925])
+maxgppBSarVec=c(sort(maxgppBSar[1:3,])[76:2925],sort(maxgppBSar[4:6,])[76:2925],sort(maxgppBSar[7:9,])[76:2925],sort(maxgppBSar[10:12,])[76:2925])
 
-
-
-# boxplots of vertices w/ observed values
+# observed max GPP and critical DOC values
 obs_maxGPPar=apply(pred_arGPP[21:length(DOCpred),],2,max)
 obs_cDOCar=numeric(12)
 for(i in 1:12){
@@ -205,8 +213,8 @@ y <- y[2] - strheight(txt, cex=2.8)
 text(x, y, txt, cex=2.8)
 ##figure 3c
 par(mar=c(5.1, 7, 3.1, 2.1) + 0.1, xpd=FALSE)
-boxplot(as.vector(cdocBSar)~rep(rep(c('3','4','1','2'),each=3),1000),outline=FALSE,ylab=expression(' critical DOC'*' (mg'*' L'^-1*')'),xlab="treatment", cex.axis=1.5, cex.lab=1.5, 
-        col=c('violetred2', 'darkorange1', 'goldenrod1', 'slateblue3'), xaxt='n')
+boxplot(cdocBSarVec~rep(c('3','4','1','2'),each=2850),outline=FALSE,ylab=expression(' critical DOC'*' (mg'*' L'^-1*')'),xlab="treatment", cex.axis=1.5, cex.lab=1.5, 
+        col=c('violetred2', 'darkorange1', 'goldenrod1', 'slateblue3'), xaxt='n',range=0)
 axis(side = 1, at = seq_along(names.box), labels = names.box, tick = FALSE)
 points(rep(c(3,4,1,2),each=3),obs_cDOCar,lwd=2)
 par(xpd=NA)
@@ -222,8 +230,8 @@ y <- y[2] - strheight(txt, cex=2.8)
 text(x, y, txt, cex=2.8)
 ##figure 3d
 par(mar=c(5.1, 5, 3.1, 2.1) + 0.1, xpd=FALSE)
-boxplot(as.vector(maxgppBSar)~rep(rep(c('3','4','1','2'),each=3),1000),outline=FALSE,ylab=expression('maximum GPP'*' (mg'*' C'*' m'^-2*' day'^-1*')'), xlab="treatment", cex.axis=1.5, cex.lab=1.5, 
-        col=c('violetred2', 'darkorange1', 'goldenrod1', 'slateblue3'), xaxt='n')
+boxplot(maxgppBSarVec~rep(c('3','4','1','2'),each=2850),outline=FALSE,ylab=expression('maximum GPP'*' (mg'*' C'*' m'^-2*' day'^-1*')'), xlab="treatment", cex.axis=1.5, cex.lab=1.5, 
+        col=c('violetred2', 'darkorange1', 'goldenrod1', 'slateblue3'), xaxt='n',range=0)
 axis(side = 1, at = seq_along(names.box), labels = names.box, tick = FALSE)
 points(rep(c(3,4,1,2),each=3),obs_maxGPPar,lwd=2)
 par(xpd=NA)
